@@ -38,7 +38,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-       return TaskResource::collection(DB::table('tasks')->select('id', 'name', 'details', "created_at")->get());  
+       return new TaskResource($task);
     }
     
 
