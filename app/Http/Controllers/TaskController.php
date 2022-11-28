@@ -14,9 +14,9 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(int $id)
     {
-        return TaskResource::collection(DB::table('tasks')->get());
+        return TaskResource::collection(DB::table('tasks')->where('user_id = ?' . [$id])->get());
     }
 
     /**
@@ -36,7 +36,7 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         return new TaskResource(Task::find($id));
     }
