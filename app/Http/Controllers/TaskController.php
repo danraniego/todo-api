@@ -37,9 +37,9 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($user_id)
     {
-        return new TaskResource(Task::find($id));
+        return TaskResource::collection(DB::table('tasks')->where('user_id', $user_id)->get());
     }
     
 
