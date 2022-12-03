@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\DB;
 use Validator;
+use App\Http\Resources\UserResource;
+
 
 class AuthController extends Controller {
     /**
@@ -52,6 +55,14 @@ class AuthController extends Controller {
 
         return response($responseData, 200);   
     }
+
+    public function fetchID($email) {
+        return DB::table('users')->select('id')->where('email', $email)->get();
+    }
+
+   
+   
+   
 
 
 }

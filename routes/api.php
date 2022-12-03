@@ -18,9 +18,11 @@ use App\Http\Controllers\TaskController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/user/{email}', [AuthController::class, 'fetchID']);
+
 Route::get('/tasks', [TaskController::class, 'index']);
 
-Route::get('/tasks/{id}', [TaskController::class, 'show']);
+Route::get('/tasks/{user_id}', [TaskController::class, 'show']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
