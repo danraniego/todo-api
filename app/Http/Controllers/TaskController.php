@@ -28,7 +28,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Task::create([
+            'name' => $request["name"],
+            'details' => $request["details"],
+            'user_id' => $request["user_id"]
+        ]);
     }
 
     /**
@@ -50,9 +54,14 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(int $id, Request $request)
     {
-        //
+        $response = DB::table('tasks')
+        ->where('id', $id)
+        ->update([
+           'name' => $request['name'],
+           'details' => $request['name'] 
+        ]);
     }
 
     /**
@@ -61,8 +70,12 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $response = DB::table('tasks')->where('id', $id)->delete();
+
+        return [
+            'success' => $response
+        ];
     }
 }
